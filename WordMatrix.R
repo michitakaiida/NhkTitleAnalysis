@@ -1,3 +1,6 @@
+library(wordcloud)
+library(RMeCab)
+
 #docmatrixの作成
 matrix <-docMatrix("./title", pos=c("名詞", "動詞", "形容動詞", "形容詞"),weight="tf") 
 matrix.dataframe <- as.data.frame(matrix)
@@ -29,7 +32,8 @@ intersect(diff.v ,mean.v)
 
 #平均と差の差集合を取得
 is.element(diff.v , mean.v)
-anomaly <- as.data.frame(cbind(diff.v ,is.element(diff.v , mean.v)))
-subset(anomaly,anomaly$V2 == FALSE)
+id <- (50:1)%/%10
+anomaly <- as.data.frame(cbind(diff.v, is.element(diff.v , mean.v), id))
+anomaly <- subset(anomaly,anomaly$V2 == FALSE)
 
-#それぞれをWordcrowdで出力
+
